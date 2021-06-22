@@ -67,13 +67,22 @@ class CategoryResource:
 
     @staticmethod
     def update_category(id: UUID) -> Response:
+        #
+        returned_dto = CategoryService().update_Category(id)
+        #
+        schema = CategorySchema()
+        response_data = schema.dumps(returned_dto)
+        #return the response
+        return Response(response_data, status=200, headers={}, mimetype="application/json")
         pass
     
     @staticmethod
     def delete_category(id: UUID) -> Response:
         #call the delete method of the category resource, get back the deleted category object
-
+        returned_dto = CategoryService().delete_Category(id)
         #serialize the category object into json
-
+        schema = CategorySchema()
+        response_data = schema.dumps(returned_dto)
         #return the response
+        return Response(response_data, status=200, headers={}, mimetype="application/json")
         pass
